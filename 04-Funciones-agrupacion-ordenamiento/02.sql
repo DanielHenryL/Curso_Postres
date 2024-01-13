@@ -21,3 +21,21 @@ SELECT
     SUM( followers ) / COUNT(*) as avg_manual 
 FROM
     users;
+    
+-- GROUP BY
+SELECT first_name, last_name, followers
+from users
+where followers = 4 OR followers = 4999;
+
+SELECT COUNT(*), followers
+from users
+where followers = 4 OR followers = 4999
+GROUP BY followers;
+
+SELECT COUNT(*), followers
+from users
+where followers BETWEEN 4500 and 4999
+GROUP BY followers
+ORDER BY followers desc;
+
+
