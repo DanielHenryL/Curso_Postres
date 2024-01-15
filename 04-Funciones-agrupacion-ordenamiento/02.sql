@@ -38,7 +38,7 @@ where followers BETWEEN 4500 and 4999
 GROUP BY followers
 ORDER BY followers desc;
 
--- Contar cuantos usuarios hay por pais y que sean mayor a 5.
+-- Having
 SELECT
     COUNT(*) as total,
     country
@@ -50,3 +50,7 @@ HAVING
     COUNT(*) BETWEEN 4 AND 7
 ORDER BY
     count(*) DESC; 
+    
+-- Distinct( elemntos unicos en el campo country)
+SELECT DISTINCT country from users;
+    
