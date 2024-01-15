@@ -53,4 +53,17 @@ ORDER BY
     
 -- Distinct( elemntos unicos en el campo country)
 SELECT DISTINCT country from users;
-    
+
+-- Group by con otras funciones 
+SELECT
+    COUNT(*),
+    SUBSTRING(email, POSITION('@' IN email) + 1) as domain
+FROM
+    users
+GROUP BY
+    SUBSTRING(email, POSITION('@' IN email) + 1)
+HAVING 
+	count(*) > 1
+ORDER BY 
+	SUBSTRING(email, POSITION('@' IN email) + 1);
+
