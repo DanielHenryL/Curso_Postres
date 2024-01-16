@@ -66,4 +66,25 @@ HAVING
 	count(*) > 1
 ORDER BY 
 	SUBSTRING(email, POSITION('@' IN email) + 1);
+	
+--Subquery	
+SELECT 
+	domain, count
+from (
+	SELECT
+	    COUNT(*),
+	    SUBSTRING(email, POSITION('@' IN email) + 1) as domain,
+	    'daniel' as name,
+	    26 as age
+	FROM
+	    users
+	GROUP BY
+	    SUBSTRING(email, POSITION('@' IN email) + 1)
+	HAVING 
+		count(*) > 1
+	ORDER BY 
+		SUBSTRING(email, POSITION('@' IN email) + 1)
+	)as email_domain;
+	
+
 
