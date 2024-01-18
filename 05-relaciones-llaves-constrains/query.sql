@@ -11,7 +11,6 @@ ALTER TABLE country ADD CHECK(
 	surfacearea >= 0
 );
 
-SELECT * from country WHERE code='CRI';
 --Eliminando un constraint
 ALTER TABLE country ADD CHECK(
 	(continent='Asia'::TEXT) or
@@ -26,3 +25,14 @@ ALTER TABLE country ADD CHECK(
 
 ALTER TABLE country DROP CONSTRAINT  "country_continent_check";
 
+SELECT * from country where continent = 'Africa';
+
+--Crear index para name, tomese que el index es parecido a una llave primaria
+CREATE UNIQUE INDEX "unique_country_name" on country(
+	name
+);
+
+--Crear index para continent
+CREATE INDEX "country_continet" on country(
+	continent
+);
