@@ -61,3 +61,6 @@ ALTER TABLE city ADD CONSTRAINT fk_country_code FOREIGN KEY ( countrycode ) REFE
 --Insert un registro.
 INSERT INTO country
 		values('AFG', 'Afghanistan', 'Asia', 'Southern Asia', 652860, 1919, 40000000, 62, 69000000, NULL, 'Afghanistan', 'Totalitarian', NULL, NULL, 'AF');
+		
+-- llave FOREIGN KEY de la tabla countrylanguage a la tabla country campo countrycode y code, respectivamente.
+ALTER TABLE countrylanguage ADD CONSTRAINT fk_country_code FOREIGN KEY ( countrycode ) REFERENCES country ( code );
