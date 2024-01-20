@@ -25,7 +25,7 @@ ALTER TABLE country ADD CHECK(
 
 ALTER TABLE country DROP CONSTRAINT  "country_continent_check";
 
-SELECT * from country where continent = 'Africa';
+SELECT * from country;
 
 --Crear index para name, tomese que el index es parecido a una llave primaria
 CREATE UNIQUE INDEX "unique_country_name" on country(
@@ -35,4 +35,21 @@ CREATE UNIQUE INDEX "unique_country_name" on country(
 --Crear index para continent
 CREATE INDEX "country_continet" on country(
 	continent
+);
+
+SELECT
+    *
+FROM
+    city
+WHERE
+    name = 'Jinzhou'
+    and countrycode = 'CHN'
+    and district = 'Liaoning';
+
+CREATE UNIQUE INDEX "unique_name_countrycode_district" on city(
+	name, countrycode, district
+);
+
+CREATE INDEX "index_district" on city(
+	district
 );
