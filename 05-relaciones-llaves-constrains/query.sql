@@ -64,3 +64,17 @@ INSERT INTO country
 		
 -- llave FOREIGN KEY de la tabla countrylanguage a la tabla country campo countrycode y code, respectivamente.
 ALTER TABLE countrylanguage ADD CONSTRAINT fk_country_code FOREIGN KEY ( countrycode ) REFERENCES country ( code );
+
+-- Eliminar en cascada
+-- llave FOREIGN KEY de la tabla countrylanguage a la tabla country campo countrycode y code, respectivamente.
+ALTER TABLE countrylanguage        -- Tabla dependiente
+	ADD CONSTRAINT fk_country_code -- NOMBRE DE LA FK
+	FOREIGN KEY ( countrycode )    -- campo de la tabla dependiente
+	REFERENCES country ( code )    -- referencia de la tabla y campo
+	ON DELETE CASCADE;  		   -- Asignar la eliminacion es cuando el registo de la tabla independiente se elimina los campos dependiente tambien son eliminados 	 
+
+DELETE FROM country WHERE code ='AFG';
+
+SELECT * FROM country where code='AFG';
+SELECT * FROM city where countrycode='AFG';
+SELECT * FROM countrylanguage where countrycode='AFG';
