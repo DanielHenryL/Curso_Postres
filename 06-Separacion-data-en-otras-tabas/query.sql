@@ -43,4 +43,50 @@ SELECT * FROM country_bk;
 SELECT * FROM country;
 -- Eliminamos el Check para poder hacer el cambio
 ALTER TABLE country DROP CONSTRAINT "country_continent_check";
+-- Antes de hacer la actualizacion y la conexion debemos hacer el query para estar seguros.
+SELECT
+    a.name,
+    a.continent,
+    (
+	    SELECT
+	        b.code
+	    FROM
+	        continent b
+	    WHERE
+	        b.name = a.continent
+    )
+FROM
+    country a;
+    
+-- Realizamos la actualizacion
+UPDATE
+    country a
+SET
+    continent = (
+        SELECT
+            b.code
+        FROM
+            continent b
+        where
+            b.name = a.continent
+    );
+    
+SELECT * FROM country;
 
+-- Cambiar el tipo de dato de country(continent) de text a int4; para poder crear la relacion con el code de la tabla continent
+ALTER TABLE country
+ALTER COLUMN continent TYPE int4
+USING continent::INTEGER;
+
+-- Agregar que se unico el campo code de la tabla continent
+ALTER TABLE continent ADD CONSTRAINT unique_continent_code UNIQUE (code);
+
+-- Realizar la relacion de foreign key
+ALTER TABLE
+    country
+ADD
+    CONSTRAINT fk_country_continent_code FOREIGN KEY (continent) REFERENCES continent (code);
+
+
+
+    
