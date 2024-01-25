@@ -20,3 +20,12 @@ ORDER BY
     
 -- Alterar secuencia 
 ALTER SEQUENCE continent_code_seq RESTART with 9;
+
+-- Full OUTER JOIN
+SELECT
+    a.name as country,
+    a.continent as continent_code,
+    b.name as continent
+FROM
+    country a FULL
+    OUTER JOIN continent b on a.continent = b.code ORDER BY a.name DESC;
