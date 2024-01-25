@@ -8,3 +8,13 @@ ORDER BY name ASC;
 SELECT a.name as pais, b.name as continent FROM country a, continent b
 WHERE a.continent = b.code
 ORDER BY b.name ASC;
+--INNER JOIN
+SELECT
+    a.name as country,
+    b.name as continent
+FROM
+    country a
+    INNER JOIN continent b on a.continent = b.code
+ORDER BY
+    a.name ASC;
+    
