@@ -18,3 +18,5 @@ FROM
 ORDER BY
     a.name ASC;
     
+-- Alterar secuencia 
+ALTER SEQUENCE continent_code_seq RESTART with 9;
