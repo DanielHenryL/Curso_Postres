@@ -21,7 +21,7 @@ ORDER BY
 -- Alterar secuencia 
 ALTER SEQUENCE continent_code_seq RESTART with 9;
 
--- Full OUTER JOIN
+-- Full OUTER JOIN(todo, incluyendo sin match)
 SELECT
     a.name as country,
     a.continent as continent_code,
@@ -29,3 +29,17 @@ SELECT
 FROM
     country a FULL
     OUTER JOIN continent b on a.continent = b.code ORDER BY a.name DESC;
+-- RIGTH OUTER JOIN(solo b, sin match)
+SELECT
+    a.name as country,
+    a.continent as continent_code,
+    b.name as continent
+FROM
+    country a
+    RIGHT OUTER JOIN continent b on a.continent = b.code
+where
+    a.continent is NULL
+ORDER BY
+    b.name ASC;
+    
+    
