@@ -107,4 +107,19 @@ UNION
 )
 ORDER BY
     count ASC;  
-    
+   
+-- Tarea 
+-- Quiero que em muestre el pais con mas ciudades
+-- Campos: Total de ciudades y el nombre del pais
+SELECT
+    count(a.name) as total,
+    a.name as country
+from
+    country a
+    INNER JOIN city b on a.code = b.countrycode
+GROUP BY
+    a.name
+ORDER BY
+    total DESC
+LIMIT
+    1; 
