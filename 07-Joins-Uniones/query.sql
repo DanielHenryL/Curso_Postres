@@ -42,4 +42,69 @@ where
 ORDER BY
     b.name ASC;
     
+-- Aggregations + join  ****opcion 1
+SELECT
+    b.name as continent_name,
+    COUNT(a.continent) as cant_country
+FROM
+    country a 
+    RIGHT JOIN continent b on a.continent = b.code
+GROUP BY
+    b.name
+ORDER BY
+    count(*) ASC;
+    
+-- Opcion 2 (No recomendada)
+(
+    SELECT
+        COUNT(*),
+        b.name as continent_name
+    FROM
+        country a
+        INNER JOIN continent b on a.continent = b.code
+    GROUP BY
+        b.name
+)
+UNION
+    (
+        SELECT
+            0 as count,
+            b.name
+        FROM
+            country a
+            RIGHT JOIN continent b on a.continent = b.code
+        WHERE
+            a.continent is NULL
+        GROUP BY
+            b.name
+    )
+ORDER BY
+    count;
+-- tarea
+(
+    SELECT
+        count(a.name),
+        b.name as contient
+    FROM
+        country a
+        INNER JOIN continent b on a.continent = b.code
+    WHERE
+        b.name NOT LIKE ('%America')
+    GROUP BY
+        b.name
+)
+UNION
+(
+    SELECT
+        count(a.name),
+        'America' as continent
+    FROM
+        country a
+        INNER JOIN continent b on (
+            a.continent = b.code
+            and b.name like '%America'
+        )
+)
+ORDER BY
+    count ASC;  
     
