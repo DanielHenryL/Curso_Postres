@@ -124,26 +124,33 @@ LIMIT
     1;
 -- ¿ Quiero saber los idiomas que se hablan por continentes ?
 SELECT
-    DISTINCT a.language,
-   	c.name as continet
+    DISTINCT d.name,
+   	c.name as continent
 from
     countrylanguage a
     INNER JOIN country b on a.countrycode = b.code
     INNER JOIN continent c on b.continent = c.code
+    INNER JOIN language d on a.languagecode = d.code 
 WHERE
     a.isofficial is TRUE ORDER BY c."name" ASC;
-    
 -- ¿ Quiero saber cuanto idiomas ofiaciales se hablan por continentes ?
-SELECT count(*), continent FROM (
-	SELECT
-	    DISTINCT a.language,
-	   	c.name as continent
-	from
-	    countrylanguage a
-	    INNER JOIN country b on a.countrycode = b.code
-	    INNER JOIN continent c on b.continent = c.code
-	WHERE
-	    a.isofficial is TRUE
-) as totales GROUP BY continent;
+SELECT
+    count(*),
+    continent
+FROM
+    (
+        SELECT
+            DISTINCT d.name,
+            c.name as continent
+        from
+            countrylanguage a
+            INNER JOIN country b on a.countrycode = b.code
+            INNER JOIN continent c on b.continent = c.code
+            INNER JOIN language d on a.languagecode = d.code
+        WHERE
+            a.isofficial is TRUE
+    ) as totales
+GROUP BY
+    continent;
 
 
