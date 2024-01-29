@@ -106,13 +106,12 @@ UNION
         )
 )
 ORDER BY
-    count ASC;  
-   
+    count ASC;
 -- Tarea 
--- Quiero que em muestre el pais con mas ciudades
+-- Quiero que em muestre el pais con mas ciudades 
 -- Campos: Total de ciudades y el nombre del pais
 SELECT
-    count(a.name) as total,
+    count(*),
     a.name as country
 from
     country a
@@ -120,6 +119,31 @@ from
 GROUP BY
     a.name
 ORDER BY
-    total DESC
+    count DESC
 LIMIT
-    1; 
+    1;
+-- ¿ Quiero saber los idiomas que se hablan por continentes ?
+SELECT
+    DISTINCT a.language,
+   	c.name as continet
+from
+    countrylanguage a
+    INNER JOIN country b on a.countrycode = b.code
+    INNER JOIN continent c on b.continent = c.code
+WHERE
+    a.isofficial is TRUE ORDER BY c."name" ASC;
+    
+-- ¿ Quiero saber cuanto idiomas ofiaciales se hablan por continentes ?
+SELECT count(*), continent FROM (
+	SELECT
+	    DISTINCT a.language,
+	   	c.name as continent
+	from
+	    countrylanguage a
+	    INNER JOIN country b on a.countrycode = b.code
+	    INNER JOIN continent c on b.continent = c.code
+	WHERE
+	    a.isofficial is TRUE
+) as totales GROUP BY continent;
+
+
