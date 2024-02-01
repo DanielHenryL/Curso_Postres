@@ -87,5 +87,21 @@ UPDATE
     employees
 SET
     hire_date = hire_date + INTERVAL '24 years';
-	
+    
+-- Clausula case y then    
+SELECT
+    first_name,
+    last_name,
+    hire_date,
+    CASE
+    	when hire_date > now() - INTERVAL '1 year' THEN '1 año o menos'
+    	when hire_date > now() - INTERVAL '3 year' THEN '1 a 3 años'
+    	when hire_date > now() - INTERVAL '6 year' THEN '3 a 6 años'
+   	ELSE '+ de 6 años' 	
+
+    END as rango_atiguedad
+FROM
+    employees
+ORDER BY
+    hire_date DESC;
 	
