@@ -53,3 +53,39 @@ SELECT
     
 FROM
     employees;
+-- Fechas y actualizaciones
+SELECT
+    hire_date,
+    MAKE_INTERVAL(
+        YEARS := 2024 - EXTRACT(
+            YEARS
+            FROM
+                hire_date
+        ) :: INTEGER
+    ),
+    MAKE_INTERVAL(
+        YEARS := date_part('years', CURRENT_DATE) :: INTEGER - EXTRACT(
+            YEARS
+            FROM
+                hire_date
+        ) :: INTEGER
+    )
+FROM
+    employees
+ORDER BY
+    hire_date DESC;
+    
+-- tarea: sumar el añoa actual al campo hire_date de todos los employees
+-- Probar el query antes de actualizarlo
+SELECT
+    hire_date,
+    hire_date + INTERVAL '24 years' as update_date
+FROM
+    employees;
+-- Actualizar bd
+UPDATE
+    employees
+SET
+    hire_date = hire_date + INTERVAL '24 years';
+	
+	
