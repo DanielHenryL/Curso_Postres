@@ -40,5 +40,16 @@ WHERE
     AND '2001-01-04'
 ORDER BY
     hire_date DESC;
-
     
+-- Intervalos
+SELECT
+    MAX(hire_date) as days,
+    MAX(hire_date) + INTERVAL '1 days' as day,
+    MAX(hire_date) + INTERVAL '3 months' as month,
+    MAX(hire_date) + INTERVAL '1 years' as years,
+    MAX(hire_date) + INTERVAL '1 years' + INTERVAL '1 month' as oferta,
+    date_part('years', now()),
+    MAKE_INTERVAL( YEARS := date_part('year', now())::INTEGER )
+    
+FROM
+    employees;
