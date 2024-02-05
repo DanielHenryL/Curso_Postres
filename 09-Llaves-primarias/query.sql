@@ -20,3 +20,10 @@ CREATE TABLE users4 (
 	user_id INTEGER GENERATED ALWAYS as IDENTITY (START WITH 100 INCREMENT BY 2) PRIMARY KEY,
 	username VARCHAR(100)
 );
+
+-- Llave primary compusta
+CREATE TABLE userDual(
+	id1 int,
+	id2 int,
+	PRIMARY KEY (id1, id2)
+);
