@@ -42,3 +42,19 @@ CREATE TABLE users5(
 	username VARCHAR(100)
 );
 
+
+-- Secuencia 
+--Crear sequence
+CREATE SEQUENCE user_sequence;
+--Eliminar sequence
+DROP SEQUENCE user_sequence;
+
+-- Siguiente valor de la sequence(nextval) y ver valor actual(currval)
+SELECT nextval('user_sequence'), currval('user_sequence');
+
+-- Ejemplo 
+CREATE TABLE users6(
+	user_id INTEGER PRIMARY KEY DEFAULT nextval('user_sequence'),
+	username VARCHAR(100)
+);
+
