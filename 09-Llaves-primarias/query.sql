@@ -27,3 +27,18 @@ CREATE TABLE userDual(
 	id2 int,
 	PRIMARY KEY (id1, id2)
 );
+
+-- Crear las funciones de tipos uuid
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+-- Eliminar las funciones de tipos uuid;
+DROP EXTENSION "uuid-ossp";
+
+-- UUID por defecto
+SELECT gen_random_uuid(), uuid_generate_v4();
+
+-- Crear tablas y ids con uuid
+CREATE TABLE users5(
+	user_id UUID DEFAULT uuid_generate_v4(),
+	username VARCHAR(100)
+);
+
